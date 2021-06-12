@@ -37,6 +37,7 @@ public class CoinChangeProblem
     public static long getWays(int n, List<Long> c)
     {
         // Write your code here
+        System.out.println(makeChangeWay2(c,n));
         return makeChange(c,n);
     }
 
@@ -70,6 +71,25 @@ public class CoinChangeProblem
         memo.put(key,ways);
 
         return ways;
+    }
+
+
+    //TRY 2
+   //LINK - https://www.youtube.com/watch?v=l_nR5X9VmaI
+
+    public static long makeChangeWay2(List<Long> coins, long money)
+    {
+        int[] dp=new int[Integer.parseInt(money+"")+1];
+        dp[0]=1;
+
+        for (int i=0;i<coins.size();i++)
+        {
+            for (int j=coins.get(i).intValue();j<dp.length;j++)
+            {
+                dp[Integer.parseInt(j+"")]+=dp[j-coins.get(i).intValue()];
+            }
+        }
+        return dp[Integer.parseInt(money+"")];
     }
 
 }
