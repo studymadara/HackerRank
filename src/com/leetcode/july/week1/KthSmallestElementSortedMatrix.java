@@ -1,4 +1,4 @@
-package com.leetcode.july;
+package com.leetcode.july.week1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
