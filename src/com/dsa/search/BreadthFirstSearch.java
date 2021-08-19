@@ -2,6 +2,10 @@ package com.dsa.search;
 
 import jdk.nashorn.internal.ir.Node;
 
+import javax.management.Query;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BreadthFirstSearch
 {
     public static class Node
@@ -38,15 +42,33 @@ public class BreadthFirstSearch
                 ),22);
     }
 
-    public static void breadthSearch(Node rootNode,int target)
+    public static void breadthSearch(BreadthFirstSearch.Node rootNode,int target)
     {
-        if(rootNode==null)
-            return ;
+       if (rootNode==null)
+           return;
 
-        if(target==rootNode.value)
-            System.out.println("FOUND :: "+rootNode.value+ " TARGET :: "+target);
+        Queue<BreadthFirstSearch.Node> nodesToVisit=new LinkedList<>();
 
-        breadthSearch(rootNode.left,target);
-        breadthSearch(rootNode.right,target);
+        nodesToVisit.add(rootNode);
+
+        while (!nodesToVisit.isEmpty())
+        {
+            System.out.println(nodesToVisit.size());
+
+            Node nn=nodesToVisit.remove();
+
+            if(nn==null)
+                continue;
+
+            if(nn.value==target)
+            {
+                System.out.println("FOUND");
+                break;
+            }
+
+            nodesToVisit.add(nn.left);
+            nodesToVisit.add(nn.right);
+        }
+
     }
 }
